@@ -9,8 +9,10 @@
 - Swagger Auto Generate (On Progress...)
 
 ## How to Use
-- install dependencies `pip install -r requirements.txt`
+- install dependencies `python -m pip install -r requirements.txt`
+- generate swagger : `python -m flask spec`
 - run : `python -m flask --app main run`
+- run dev : `python -m flask --app main run --debug`
 
 ## You Can Use Scripts
 #### Remove all __pycache__ directory

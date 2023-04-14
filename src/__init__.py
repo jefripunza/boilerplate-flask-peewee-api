@@ -1,21 +1,11 @@
 import os
 import sys
 
-from flask import Flask, g, jsonify
+from flask import g, jsonify
 from apiflask import APIFlask
 
 from config import public_folder, SECRET_KEY
 from src.modules.database import database
-
-# app = Flask(
-#     __name__,
-#     instance_relative_config=True,
-#     static_url_path='/public',
-#     static_folder=public_folder,
-# )
-# app.config.from_mapping(
-#     SECRET_KEY=SECRET_KEY
-# )
 
 app = APIFlask(
     __name__,
@@ -26,7 +16,7 @@ app = APIFlask(
     version='1.0',
 )
 app.config.from_mapping(
-    SECRET_KEY=SECRET_KEY
+    SECRET_KEY=SECRET_KEY,
 )
 app.config['SPEC_FORMAT'] = 'yaml'
 app.config['LOCAL_SPEC_PATH'] = 'swagger.yaml'
