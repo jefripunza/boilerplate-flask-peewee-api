@@ -1,5 +1,4 @@
-import os
-import sys
+import os, sys
 
 from flask import g, jsonify
 from apiflask import APIFlask
@@ -22,6 +21,14 @@ app.config['SPEC_FORMAT'] = 'yaml'
 app.config['LOCAL_SPEC_PATH'] = 'swagger.yaml'
 app.config['LOCAL_SPEC_JSON_INDENT'] = 4
 app.config['SYNC_LOCAL_SPEC'] = True
+app.security_schemes = {  # equals to use config SECURITY_SCHEMES
+    'Bearer': {
+        'type': 'apiKey',
+        'in': 'header',
+        'name': 'Authorization',
+        'description': 'Enter your bearer token in the format **Bearer &lt;token>**',
+    }
+}
 
 # Request handlers -- these two hooks are provided by flask and we will use them
 # to create and tear down a database connection on each request.

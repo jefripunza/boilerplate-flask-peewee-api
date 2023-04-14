@@ -29,4 +29,4 @@ AUTH_SERVICE = os.environ.get('AUTH_SERVICE')
 
 # ==================================================================================================================== #
 
-role_register = ['buyer', 'merchant']
+role_user = ['buyer', 'merchant']

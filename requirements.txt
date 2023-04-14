@@ -2,6 +2,7 @@ flask
 gunicorn
 PyJWT
 marshmallow
+marshmallow_dataclass
 apiflask[yaml]
 
 peewee

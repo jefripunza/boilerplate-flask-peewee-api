@@ -2,20 +2,27 @@ from flask import (
     request, g, jsonify
 )
 from apiflask import APIBlueprint
-router = APIBlueprint('auth', __name__, tag="Auth")
 from marshmallow import ValidationError
 
-from config import role_register
-from src.modules.JWT import create_token
-
 # =================================== #
+
+from config import role_user
+from src.modules.JWT import create_token
 
 from src.dto.auth import RequestRegister, RequestLogin
 from src.models.users import Users
 
+from src.docs.register import DocRequestRegister
+from src.docs.basic import DocResponseMessageOnly
+
 # =================================== #
 
-@router.route('/api/auth/v1/register', methods=['POST'])
+router = APIBlueprint('auth', __name__, tag="Auth")
+
+@router.post('/api/auth/v1/register')
+@router.input(DocRequestRegister(partial=True))
+@router.output(DocResponseMessageOnly, 200)
+@router.output(DocResponseMessageOnly, 400)
 def register():
     body = request.json
     schema = RequestRegister()
@@ -26,7 +33,7 @@ def register():
         # Return a nice message if validation fails
         return jsonify(err.messages), 400
 
-    if body['role'] not in role_register:
+    if body['role'] not in role_user:
         return jsonify(
             message="role cannot permit to register!",
         ), 400
@@ -43,7 +50,9 @@ def register():
         message="success register!",
     )
 
-@router.route('/api/auth/v1/login', methods=['POST'])
+@router.post('/api/auth/v1/login')
+@router.output(DocResponseMessageOnly, 200)
+@router.output(DocResponseMessageOnly, 400)
 def login():
     body = request.json
     schema = RequestLogin()

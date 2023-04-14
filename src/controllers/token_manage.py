@@ -1,8 +1,7 @@
 from flask import (
-    Blueprint, g, jsonify
+    g, jsonify
 )
 from apiflask import APIBlueprint
-router = APIBlueprint('token', __name__, tag='Token')
 
 # =================================== #
 
@@ -10,6 +9,8 @@ from src.middlewares.token import (token_validation_self, token_validation)
 from src.modules.JWT import create_token
 
 # =================================== #
+
+router = APIBlueprint('token', __name__, tag='Token')
 
 from src import app
 @app.after_request
@@ -26,9 +27,11 @@ def handle_refresh_token(response):
         return response
     return response
 
+# =================================== #
 
 @router.get('/api/token/validation')
 @token_validation_self
+@router.doc(security='Bearer')
 def self_process():
     return jsonify(
         id=g.user_id,
@@ -38,6 +41,7 @@ def self_process():
 
 @router.get('/api/token/validation-service')
 @token_validation
+@router.doc(security='Bearer')
 def microservice_process():
     return jsonify(
         id= g.user_id,
