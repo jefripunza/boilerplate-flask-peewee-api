@@ -4,6 +4,7 @@ PyJWT
 marshmallow
 marshmallow_dataclass
 apiflask[yaml]
+Werkzeug
 
 peewee
 peewee-db-evolve

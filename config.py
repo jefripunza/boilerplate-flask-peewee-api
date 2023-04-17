@@ -7,6 +7,8 @@ public_folder = os.path.join(os.path.dirname(__file__), 'public')
 # config - aside from our database, the rest is for use by Flask
 PORT = int(os.environ.get('FLASK_RUN_PORT', 5000))
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-secret-key-server'
+FLASK_DEBUG = os.environ.get('FLASK_DEBUG') or '0'
+IS_DEVELOPMENT = FLASK_DEBUG == '1'
 
 # JWT
 JWT_SECRET = os.environ.get('JWT_SECRET') or 's3cr3t'
@@ -29,4 +31,4 @@ AUTH_SERVICE = os.environ.get('AUTH_SERVICE')
 
 # ==================================================================================================================== #
 
-role_user = ['buyer', 'merchant']
+role_user = ['merchant', 'buyer']

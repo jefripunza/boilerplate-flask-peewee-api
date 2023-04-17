@@ -14,7 +14,7 @@ class Todos(BaseModel):
     pub_date = DateTimeField(default=datetime.datetime.now)
     is_done = BooleanField(default=False)
 
-    def new_todo(content, user_id):
+    def new(content, user_id):
         try:
             Todos.create(
                 content=content,
@@ -25,13 +25,13 @@ class Todos(BaseModel):
             print(e)
             return False
 
-    def list_todo_by_user_id(user_id):
+    def list_by_user_id(user_id):
         res = Todos \
             .select(Todos.id, Todos.content, Todos.is_done, Todos.pub_date) \
             .where(Todos.user_id == user_id).dicts()
         return list(res)
 
-    def is_todo_exist(id, user_id):
+    def is_exist(id, user_id):
         try:
             return Todos.get(
                 (Todos.id == id) & (Todos.user_id == user_id)
@@ -39,7 +39,7 @@ class Todos(BaseModel):
         except:
             return False
 
-    def update_todo_by_id(id, user_id, content):
+    def update_by_id(id, user_id, content):
         try:
             Todos.update(
                     content=content,
@@ -51,7 +51,7 @@ class Todos(BaseModel):
             print(e)
             return False
 
-    def delete_todo_by_id(id, user_id):
+    def delete_by_id(id, user_id):
         try:
             Todos.delete() \
                 .where(
@@ -62,7 +62,7 @@ class Todos(BaseModel):
             print(e)
             return False
 
-    def done_todo_by_id(id, user_id, is_done):
+    def done_by_id(id, user_id, is_done):
         try:
             Todos.update(
                     is_done=is_done,

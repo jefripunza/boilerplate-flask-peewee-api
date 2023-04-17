@@ -1,5 +1,5 @@
 from flask import (
-    g, jsonify
+    g, jsonify, make_response
 )
 from apiflask import APIBlueprint
 
@@ -33,17 +33,17 @@ def handle_refresh_token(response):
 @token_validation_self
 @router.doc(security='Bearer')
 def self_process():
-    return jsonify(
+    return make_response(jsonify(
         id=g.user_id,
         role=g.user_role,
-    )
+    ))
 
 
 @router.get('/api/token/validation-service')
 @token_validation
 @router.doc(security='Bearer')
 def microservice_process():
-    return jsonify(
+    return make_response(jsonify(
         id= g.user_id,
         role= g.user_role,
-    )
+    ))

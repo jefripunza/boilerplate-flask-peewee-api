@@ -1,4 +1,4 @@
-from flask import request, g, jsonify
+from flask import request, g, jsonify, make_response
 from functools import wraps
 
 import jwt
@@ -9,9 +9,9 @@ def token_validation_self(f):
     def _next(*args, **kwargs):
         token = request.headers.get('authorization')
         if not token or not token.startswith('Bearer '):
-            return jsonify(
+            return make_response(jsonify(
                 message='Authorization Bearer is required!',
-            ), 403
+            ), 403)
         try:
             token = token.split(' ')[1]
             g.is_jwt_expired = False
@@ -22,9 +22,9 @@ def token_validation_self(f):
             g.user_id = result['id']
             g.user_role = result['role']
         except Exception as e:
-            return jsonify(
+            return make_response(jsonify(
                 message= str(e) + "!",
-            ), 401
+            ), 401)
         # next...
         return f(*args, **kwargs)
     return _next
@@ -35,9 +35,9 @@ def token_validation(f):
     def _next(*args, **kwargs):
         token = request.headers.get('authorization')
         if not token or not token.startswith('Bearer '):
-            return jsonify(
+            return make_response(jsonify(
                 message='Authorization Bearer is required!',
-            ), 403
+            ), 403)
         try:
             g.is_jwt_expired = False
             g.jwt_refresh_token = None
@@ -47,17 +47,17 @@ def token_validation(f):
             refresh_token = result.headers.get("x-new-token")
             response = result.json()
             if result.status_code != 200:
-                return jsonify(
+                return make_response(jsonify(
                     message= response['message'],
-                ), result.status_code
+                ), result.status_code)
             g.user_id = response['id']
             g.user_role = response['role']
             g.is_jwt_expired = True if refresh_token else False
             g.jwt_refresh_token = refresh_token if g.is_jwt_expired else None
         except Exception as e:
-            return jsonify(
+            return make_response(jsonify(
                 message= str(e) + "!",
-            ), 401
+            ), 401)
         # next...
         return f(*args, **kwargs)
     return _next

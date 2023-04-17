@@ -1,5 +1,5 @@
 from apiflask import Schema
 from apiflask.fields import String
 
-class DocResponseMessageOnly(Schema):
+class ResponseMessageOnly(Schema):
     message = String()

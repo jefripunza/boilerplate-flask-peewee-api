@@ -16,9 +16,10 @@ class Users(BaseModel):
 
     def is_username_exist(username):
         try:
-            return Users.get(
+            Users.get(
                 (Users.username == username)
             )
+            return True
         except:
             return False
 
