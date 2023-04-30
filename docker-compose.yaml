@@ -9,7 +9,7 @@ services:
             - "5001:5001"
         volumes:
             # setup file or folder public
-            - micro-service:/server/public
+            - micro-service:/app/public
         network_mode: bridge
         extra_hosts:
             - "host.docker.internal:host-gateway"

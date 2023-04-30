@@ -7,8 +7,8 @@ from src.swagger import auto_generate_swagger
 
 from config import PORT
 
-if __name__ == "main":
+if __name__ == "__name__":
     create_tables()
     print("Starting server at %s..." % PORT)
     auto_generate_swagger()
-    app.run()
+    app.run(host='0.0.0.0')
