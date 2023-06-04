@@ -1,5 +1,5 @@
 import peeweedbevolve # don't delete this...
-from src.modules.database import database, _is_sqlite
+from src.utils.database import database, _is_sqlite
 
 from src.models.users import (Users)
 from src.models.todos import (Todos)

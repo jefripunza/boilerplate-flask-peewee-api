@@ -1,7 +1,7 @@
 import datetime
 
 from peewee import *
-from src.modules.database import BaseModel, database
+from src.utils.database import BaseModel, database
 
 from hashlib import md5
 

@@ -6,7 +6,7 @@ from apiflask import APIBlueprint
 # =================================== #
 
 from src.middlewares.token import (token_validation_self, token_validation)
-from src.modules.JWT import create_token
+from src.utils.JWT import create_token
 
 # =================================== #
 

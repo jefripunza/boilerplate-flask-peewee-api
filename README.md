@@ -6,7 +6,7 @@
 - Use Peewee ORM (in NodeJS like Knex)
 - Auto Migration Table on Models (only change your model)
 - Docker Ready!
-- Swagger Auto Generate (On Progress...)
+- Swagger Auto Generate
 
 ## How to Use
 - install dependencies `python -m pip install -r requirements.txt`

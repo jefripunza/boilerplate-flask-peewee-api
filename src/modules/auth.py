@@ -7,7 +7,7 @@ from marshmallow import ValidationError
 # =================================== #
 
 from config import role_user
-from src.modules.JWT import create_token
+from src.utils.JWT import create_token
 
 from src.dto.auth import RequestRegister, RequestLogin
 from src.dto.basic import ResponseMessageOnly

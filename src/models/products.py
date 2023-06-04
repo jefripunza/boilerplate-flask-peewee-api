@@ -1,7 +1,7 @@
 import datetime
 
 from peewee import *
-from src.modules.database import BaseModel
+from src.utils.database import BaseModel
 
 from src.models import Users
 

@@ -3,7 +3,7 @@ from functools import wraps
 
 import jwt
 from config import AUTH_SERVICE
-from src.modules.JWT import token_validate, check_expired
+from src.utils.JWT import token_validate, check_expired
 def token_validation_self(f):
     @wraps(f)
     def _next(*args, **kwargs):

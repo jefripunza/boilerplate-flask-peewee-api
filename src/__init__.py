@@ -4,7 +4,7 @@ from flask import g, jsonify
 from apiflask import APIFlask
 
 from config import public_folder, SECRET_KEY
-from src.modules.database import database
+from src.utils.database import database
 
 app = APIFlask(
     __name__,
@@ -62,7 +62,7 @@ def internal_server_error(e):
     return jsonify({'message' : 'Internal Server Error'}), 500
 
 # Controller Auto Import
-controller_dir = os.path.join(os.path.dirname(__file__), 'controllers')
+controller_dir = os.path.join(os.path.dirname(__file__), 'modules')
 sys.path.insert(0, controller_dir)
 for filename in os.listdir(controller_dir):
     if (filename[-3:].lower() == ".py" and not filename.startswith("#")):
